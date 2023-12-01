@@ -14,34 +14,36 @@
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 
+#include "Ве_крест_крест.h"
 
-void draw_vicsek(ImDrawList *drawlist, int level, ImVec2 &coords, float size, bool vertical, ImVec4 &color) {
-    if (level == 0) {
-        drawlist->AddRect(coords, ImVec2(coords.x + size, coords.y + size), ImGui::ColorConvertFloat4ToU32(color));
-    } else {
-        float size3 = size / 3;
-        for (int i=0; i<3;i++) {
-            for (int j=0; j<3;j++) {
-                bool vertical_cond = (i == 1 || j == 1) && vertical;
-                bool horizontal_cond = ((i + j) % 2 == 0) && !vertical;
-                if (!(vertical_cond || horizontal_cond)) {
-                    continue;
+
+бестолочь вичек_рисовать(Холст *холстик, целина глубина, Пара &координаты, малый_дробь размер, розсуд вертикально, Четвёрка &цвет) {
+    коли (глубина == 0) {
+        холстик->AddRect(координаты, Пара(координаты.x + размер, координаты.y + размер), Четвёрка_в_цвет(цвет));
+    } отнюдь {
+        малый_дробь треть = размер / 3;
+        для (целина i=0; i<3;i++) {
+            для (целина j=0; j<3;j++) {
+                розсуд нужно_вертикально = (i == 1 || j == 1) && вертикально;
+                розсуд нужно_горизонтально = ((i + j) % 2 == 0) && !вертикально;
+                коли (!(нужно_вертикально || нужно_горизонтально)) {
+                    добить_ящеров;
                 }
-                ImVec2 new_coords = ImVec2(coords.x + i * size3, coords.y + j * size3);
-                draw_vicsek(drawlist, level-1, new_coords, size3, vertical, color);
+                Пара новые_координаты = Пара(координаты.x + i * треть, координаты.y + j * треть);
+                вичек_рисовать(холстик, глубина-1, новые_координаты, треть, вертикально, цвет);
             }
         }
     }
 }
 
 // Main code
-int main(int, char**)
+царь_батюшка_главный(целина, char**)
 {
     // Setup SDL
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
+    коли (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
     {
         printf("Error: %s\n", SDL_GetError());
-        return -1;
+        воздать -1;
     }
 
     // Decide GL+GLSL versions
@@ -85,34 +87,34 @@ int main(int, char**)
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    Диковинка::CreateContext();
+    ImGuiIO& io = Диковинка::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
+    // Setup Dear imGui style
+    Диковинка::StyleColorsDark();
 
     // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // Our state
-    int levels = 7;
-    bool vertical = true;
-    ImVec2 base_coords = ImVec2(100, 100);
-    ImVec4 fractal_color = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
-    ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
+    целина глубина = 7;
+    розсуд вертикально = true;
+    Пара начальные_координаты = Пара(100, 100);
+    Четвёрка цвет_фрактала = Четвёрка(1.0f, 1.0f, 1.0f, 1.0f);
+    Четвёрка цвет_фона = Четвёрка(0.0f, 0.0f, 0.0f, 1.00f);
 
     // Main loop
-    bool done = false;
+    розсуд всё = кривда;
 #ifdef __EMSCRIPTEN__
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
     // You may manually call LoadIniSettingsFromMemory() to load settings from your own storage.
     io.IniFilename = nullptr;
     EMSCRIPTEN_MAINLOOP_BEGIN
 #else
-    while (!done)
+    покуда (!всё)
 #endif
     {
         // Poll and handle events (inputs, window resize, etc.)
@@ -121,46 +123,47 @@ int main(int, char**)
         // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
         // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
         SDL_Event event;
-        while (SDL_PollEvent(&event))
+
+        покуда (SDL_PollEvent(&event))
         {
             ImGui_ImplSDL2_ProcessEvent(&event);
-            if (event.type == SDL_QUIT)
-                done = true;
-            if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(window))
-                done = true;
+            коли (event.type == SDL_QUIT)
+                всё = правда;
+            коли (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(window))
+                всё = правда;
         }
 
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
+        // Start the Dear imgui frame
+        И_Раз();
+        И_Два();
+        Диковинка::Кадр();
 
-        ImGuiViewport *viewport = ImGui::GetMainViewport();
+        Ставни *ставеньки = Диковинка::ДайСтавни();
 
         {
-            ImGui::Begin("Vicsek fractal", nullptr, ImGuiWindowFlags_NoBringToFrontOnFocus + ImGuiWindowFlags_NoMove + ImGuiWindowFlags_NoDecoration);
-            ImGui::SetWindowPos(viewport->WorkPos);
-            ImGui::SetWindowSize(viewport->WorkSize);
+            Диковинка::Начнём("фрактал Вичека", туда_не_знаю_куда, НеВыпендриваться + Стоять + Голый);
+            Диковинка::ДатьПоложение(ставеньки->Положение);
+            Диковинка::ДатьРазмер(ставеньки->Размер);
 
-            ImDrawList *drawlist = ImGui::GetWindowDrawList();
+            Холст *холстик = Диковинка::ДайХолст();
 
-            draw_vicsek(drawlist, levels, base_coords, 600, vertical, fractal_color);
-            ImGui::End();
+            вичек_рисовать(холстик, глубина, начальные_координаты, 600, вертикально, цвет_фрактала);
+            Диковинка::СказочкеКонец();
         }
 
         {
-            ImGui::Begin("FPS (7 levels)");                          // Create a window called "Hello, world!" and append into it.
+            Диковинка::Начнём("FPS (7 levels)");                          // Create a window called "Hello, world!" and append into it.
 
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            ImGui::End();
+            Диковинка::Письмо("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+            Диковинка::СказочкеКонец();
         }
 
         // Rendering
-        ImGui::Render();
-        glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
-        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+        Диковинка::Показывай();
+        glViewport(0, 0, (целина)io.DisplaySize.x, (целина)io.DisplaySize.y);
+        glClearColor(цвет_фона.x * цвет_фона.w, цвет_фона.y * цвет_фона.w, цвет_фона.z * цвет_фона.w, цвет_фона.w);
         glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplOpenGL3_RenderDrawData(Диковинка::GetDrawData());
         SDL_GL_SwapWindow(window);
     }
 #ifdef __EMSCRIPTEN__
@@ -170,11 +173,11 @@ int main(int, char**)
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
+    Диковинка::DestroyContext();
 
     SDL_GL_DeleteContext(gl_context);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    return 0;
+    воздать 0;
 }
