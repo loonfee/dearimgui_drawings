@@ -1,0 +1,3 @@
+[submodule "entrimail/imgui"]
+	path = entrimail/imgui
+	url = https://github.com/ocornut/imgui.git
