@@ -122,5 +122,6 @@
 #define И_Раз ImGui_ImplOpenGL3_NewFrame
 #define И_Два ImGui_ImplSDL2_NewFrame
 #define Кадр NewFrame
+#define Прямоугольник AddRect
 
 #endif
