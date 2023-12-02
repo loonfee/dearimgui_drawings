@@ -1,4 +1,4 @@
-# ui_dig
+# dearimgui_drawings
 Сделано на windows из https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_opengl3/main.cpp
 ```shell
 # добавить C:\msys64\mingw64\bin в PATH
