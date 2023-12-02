@@ -3,28 +3,35 @@
 
 // Main code
 float Angles[] = { 0.0f, 60.0f, -120.0f, 60.0f };
+int level = 4;
+int size = 300;
+float thickness = 1.0f;
+float r = 255.0f;
+float g = 0.0f;
+float b = 0.0f;
+Vector P;
+Vector D;
 
-Vector coch(ImDrawList *drawlist, Vector P, Vector D, int n) {
+void coch(ImDrawList *drawlist, Vector P, Vector D, int n) {
     if (n == 0) {
-        Vector P_old = P;
-        Vector S = P.sum(D);
+        Vector P_old = ::P;
+        Vector S = ::P.sum(::D);
         drawlist->AddLine(ImVec2(P_old.x, P_old.y), ImVec2(S.x, S.y), IM_COL32(255, 0, 0, 255));
-        return S;
     } else {
         for (int i = 0; i < 4; i++ ) {
-            return coch(drawlist, P, D.turn(Angles[i]), n-1);
+            coch(drawlist, ::P, ::D.turn(Angles[i]), n-1);
         }
     }
-    return D;
 }
 
-void draw(ImDrawList *drawlist, Vector P, Vector D, int level) {
-    Vector P1 = coch(drawlist, P, D, level);
-    D.turn(-120.0f);
-    Vector P2 = coch(drawlist, P1, D, level);
-    D.turn(-120.0f);
-    Vector P3 = coch(drawlist, P2, D, level);
-    D.turn(-120.0f);
+void draw(ImDrawList *drawlist, Vector P, Vector D, int level, int size) {
+    ::P.x = ImGui::GetWindowPos().x + float(500 - ::size) / 2.0f; ::P.y = ImGui::GetWindowPos().y + 250.0f + float(::size) * float(std::pow(3.0f, 0.5f)) / 6.0f;
+    ::D.x = float(::size) / float(std::pow(3, ::level)); ::D.y = 0;
+    for (int i = 1; i <=3; i++) {
+        coch(drawlist, ::P, ::D, ::level);
+        ::D.turn(-120.0f);
+    }
+
 }
 
 
@@ -154,14 +161,6 @@ int main(int, char**)
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
         {
-            static int level = 3;
-            static int size = 300;
-            static float thickness = 1.0f;
-            static float r = 255.0f;
-            static float g = 0.0f;
-            static float b = 0.0f;
-            Vector P = Vector(float(500 - size) / 2.0f, 250.0f + float(size) * float(std::pow(3.0f, 0.5f)) / 6.0f);
-            Vector D = Vector(float(size) / float(std::pow(3, level)), 0);
             // static Vector P = Vector(float(500 - size) / 2, float(250) + float(size) * float(std::pow(3, 1/2)) / 6);
             // static Vector D = Vector(float(size) / float(std::pow(3, level)), 0);
 
@@ -173,20 +172,16 @@ int main(int, char**)
 
             ImGui::SliderInt("level", &level, 0, 5);            // Edit 1 float using a slider from 0.0f to 1.0f
             ImGui::SliderInt("size", &size, 50, 400);
-            ImGui::SliderFloat("thickness", &thickness, 1.0f, 5.0f);
-            ImGui::SliderFloat("Red", &r, 0.0f, 255.0f);
-            ImGui::SliderFloat("Green", &g, 0.0f, 255.0f);
-            ImGui::SliderFloat("Blue", &b, 0.0f, 255.0f);
 
             // if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
             //     counter++;
             // ImGui::SameLine();
             // ImGui::Text("counter = %d", counter);
 
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+            ImGui::Text("FPS: %.1f", io.Framerate);
             
-            auto drawlist = ImGui::GetWindowDrawList();
-            draw(drawlist, P, D, level);
+            auto drawlist = ImGui::GetForegroundDrawList();
+            draw(drawlist, P, D, level, size);
             
             ImGui::End();
         }

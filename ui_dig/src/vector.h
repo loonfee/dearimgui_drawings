@@ -18,6 +18,11 @@ struct Vector {
     float x;
     float y;
 
+    Vector() {
+        this->x = 0;
+        this->y = 0;
+    }
+    
     Vector(float x, float y) {
         this->x = x;
         this->y = y;
