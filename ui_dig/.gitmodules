@@ -1,3 +1,0 @@
-[submodule "ui_dig/imgui"]
-	path = ui_dig/imgui
-	url = https://github.com/ocornut/imgui.git
