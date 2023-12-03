@@ -76,7 +76,7 @@ int main(int, char **) {
       SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
   SDL_GLContext gl_context = SDL_GL_CreateContext(window);
   SDL_GL_MakeCurrent(window, gl_context);
-  SDL_GL_SetSwapInterval(1); // Enable vsync
+  SDL_GL_SetSwapInterval(0); // Enable vsync
 
   // Setup Dear ImGui context
   IMGUI_CHECKVERSION();
