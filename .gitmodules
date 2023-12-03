@@ -26,6 +26,3 @@
 	path = Golovkov/external/imgui
 	url = https://github.com/ocornut/imgui.git
 
-[submodule "lipatova/external/imgui"]
-	path = lipatova/external/imgui
-	url = https://github.com/ocornut/imgui.git
