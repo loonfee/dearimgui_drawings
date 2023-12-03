@@ -1,0 +1,3 @@
+C:/msys64/home/Admin/dearimgui_drawings/Mikh_Ilya/build/CMakeFiles/Mikh_Ilya.dir
+C:/msys64/home/Admin/dearimgui_drawings/Mikh_Ilya/build/CMakeFiles/edit_cache.dir
+C:/msys64/home/Admin/dearimgui_drawings/Mikh_Ilya/build/CMakeFiles/rebuild_cache.dir
