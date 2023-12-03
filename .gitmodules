@@ -8,3 +8,6 @@
 [submodule "merirut/dependencies/imgui"]
 	path = merirut/dependencies/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "Mikh_Ilya/imgui"]
+	path = Mikh_Ilya/imgui
+	url = https://github.com/ocornut/imgui.git
