@@ -94,7 +94,7 @@ int main(int, char **) {
       SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
   SDL_GLContext gl_context = SDL_GL_CreateContext(window);
   SDL_GL_MakeCurrent(window, gl_context);
-  SDL_GL_SetSwapInterval(1);
+  SDL_GL_SetSwapInterval(0);
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
