@@ -1,3 +1,23 @@
+[submodule "lindy2076_vicsek/imgui"]
+	path = lindy2076_vicsek/imgui
+  url = https://github.com/ocornut/imgui.git
+  
+[submodule "entrimail/imgui"]
+	path = entrimail/imgui
+	url = https://github.com/ocornut/imgui.git
+  
+[submodule "merirut/dependencies/imgui"]
+	path = merirut/dependencies/imgui
+	url = https://github.com/ocornut/imgui.git
+  
+[submodule "Mikh_Ilya/imgui"]
+	path = Mikh_Ilya/imgui
+  url = https://github.com/ocornut/imgui.git
+  
+[submodule "anri/imgui"]
+	path = anri/imgui
+  url = https://github.com/ocornut/imgui.git
+  
 [submodule "shanin/imgui"]
 	path = shanin/imgui
 	url = https://github.com/ocornut/imgui.git
